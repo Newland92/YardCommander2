@@ -1,22 +1,25 @@
-from core.browser import Browser
+from core.browser_manager import BrowserManager
 
-browser = Browser()
 
-print("Launching Chrome...")
+def main():
+    browser = BrowserManager()
 
-browser.launch_chrome()
+    try:
+        browser.launch()
 
-input(
-    "\nLog into Yard Commander.\n"
-    "When you are looking at the site press ENTER..."
-)
+        input("\nPress ENTER after Chrome has opened and you are logged in...")
 
-browser.connect()
+        browser.connect()
+        browser.goto_edit()
 
-browser.goto_edit()
+        print("\nSUCCESS!")
+        print("Browser Manager is working correctly.")
 
-print("SUCCESS!")
+        input("\nPress ENTER to close...")
 
-input("\nPress ENTER to exit...")
+    finally:
+        browser.disconnect()
 
-browser.disconnect()
+
+if __name__ == "__main__":
+    main()
